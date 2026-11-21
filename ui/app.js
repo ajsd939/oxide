@@ -348,8 +348,15 @@ function applyTheme() {
     monaco.editor.setTheme(theme.id);
   }
   if (term) term.options.theme = xtermTheme();
+  localStorage.setItem("oxide-theme", String(state.themeIndex));
   $("status-theme").textContent = theme.label;
 }
+
+// Restore the last-used theme before the first applyTheme runs.
+(function () {
+  const saved = parseInt(localStorage.getItem("oxide-theme") || "0", 10);
+  state.themeIndex = Number.isInteger(saved) && saved >= 0 && saved < THEMES.length ? saved : 0;
+})();
 
 function xtermTheme() {
   const themes = {

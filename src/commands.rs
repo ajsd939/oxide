@@ -106,15 +106,54 @@ fn has_rust(root: &Path) -> bool {
     false
 }
 
-/// Called once from `setup`: pick the initial root and start the pollers.
+// ---------------------------------------------------------------------------
+// Settings (%APPDATA%\dev.filip.oxide\settings.json)
+// ---------------------------------------------------------------------------
+
+fn settings_path(app: &AppHandle) -> PathBuf {
+    let dir = app
+        .path()
+        .app_data_dir()
+        .unwrap_or_else(|_| std::env::temp_dir());
+    let _ = std::fs::create_dir_all(&dir);
+    dir.join("settings.json")
+}
+
+fn read_saved_root(app: &AppHandle) -> Option<PathBuf> {
+    let text = std::fs::read_to_string(settings_path(app)).ok()?;
+    let value: serde_json::Value = serde_json::from_str(&text).ok()?;
+    value
+        .get("root")
+        .and_then(|r| r.as_str())
+        .map(PathBuf::from)
+        .filter(|p| p.is_dir())
+}
+
+pub fn save_root_setting(app: &AppHandle, root: &Path) {
+    let path = settings_path(app);
+    // Merge into the existing file so extra keys survive.
+    let mut value = std::fs::read_to_string(&path)
+        .ok()
+        .and_then(|t| serde_json::from_str::<serde_json::Value>(&t).ok())
+        .unwrap_or_else(|| serde_json::json!({}));
+    value["root"] = serde_json::json!(root.to_string_lossy().into_owned());
+    if let Ok(text) = serde_json::to_string_pretty(&value) {
+        let _ = std::fs::write(path, text);
+    }
+}
+
+/// Called once from `setup`: pick the initial root (CLI arg > saved setting >
+/// cwd), persist it, and start the pollers.
 pub fn init_app(app: AppHandle) {
     let root = std::env::args()
         .nth(1)
         .map(PathBuf::from)
         .filter(|p| p.is_dir())
+        .or_else(|| read_saved_root(&app))
         .or_else(|| std::env::current_dir().ok());
 
     if let Some(root) = root {
+        save_root_setting(&app, &root);
         let state: State<AppState> = app.state();
         *state.root.lock().unwrap() = Some(root.clone());
         let term: State<crate::term::TermState> = app.state();
@@ -238,6 +277,7 @@ pub fn set_root(app: AppHandle, state: State<AppState>, path: String) -> Result<
     if !path.is_dir() {
         return Err(format!("not a directory: {path:?}"));
     }
+    save_root_setting(&app, &path); // remember for next launch
     *state.root.lock().unwrap() = Some(path.clone());
     let term: State<crate::term::TermState> = app.state();
     *term.root.lock().unwrap() = Some(path.clone());
