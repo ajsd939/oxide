@@ -1,4 +1,5 @@
 /target
+/gen
 /ui/monaco/
 /ui/xterm/
 *.log
