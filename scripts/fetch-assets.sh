@@ -4,8 +4,8 @@
 set -euo pipefail
 
 UI="$(cd "$(dirname "$0")/.." && pwd)/ui"
-mkdir -p "$UI/monaco" "$UI/xterm" "$TMPDIR/rustide-assets" 2>/dev/null || mkdir -p "$UI/monaco" "$UI/xterm" /tmp/rustide-assets
-TMP="${TMPDIR:-/tmp}/rustide-assets"
+TMP="/tmp/rustide-assets"
+mkdir -p "$UI/monaco" "$UI/xterm" "$TMP"
 
 fetch() {
     local url="$1" tar="$2" src="$3" dest="$4"
