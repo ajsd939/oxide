@@ -1,5 +1,5 @@
 [package]
-name = "rustide"
+name = "oxide"
 version = "0.3.0"
 edition = "2021"
 description = "A VS Code-like IDE in Rust (Tauri + Monaco) with rust-analyzer intellisense, integrated terminal, and git"

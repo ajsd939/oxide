@@ -214,11 +214,11 @@ pub fn get_root(state: State<AppState>) -> Option<String> {
         .map(|p| p.to_string_lossy().into_owned())
 }
 
-/// Frontend diagnostics: appends a line to %TEMP%\rustide-frontend.log.
+/// Frontend diagnostics: appends a line to %TEMP%\oxide-frontend.log.
 #[tauri::command]
 pub fn frontend_log(line: String) {
     use std::io::Write as _;
-    let path = std::env::temp_dir().join("rustide-frontend.log");
+    let path = std::env::temp_dir().join("oxide-frontend.log");
     if let Ok(mut f) = std::fs::OpenOptions::new().create(true).append(true).open(&path) {
         let _ = writeln!(f, "{line}");
     }

@@ -4,7 +4,7 @@
 set -euo pipefail
 
 UI="$(cd "$(dirname "$0")/.." && pwd)/ui"
-TMP="/tmp/rustide-assets"
+TMP="/tmp/oxide-assets"
 mkdir -p "$UI/monaco" "$UI/xterm" "$TMP"
 
 fetch() {

@@ -316,7 +316,7 @@ mod tests {
 
     #[test]
     fn detects_python_project() {
-        let dir = std::env::temp_dir().join(format!("rustide-detect-{}", std::process::id()));
+        let dir = std::env::temp_dir().join(format!("oxide-detect-{}", std::process::id()));
         std::fs::create_dir_all(&dir).unwrap();
         std::fs::write(dir.join("main.py"), "print('hi')").unwrap();
         let info = detect_project(&dir);
@@ -328,7 +328,7 @@ mod tests {
 
     #[test]
     fn detects_empty_folder_as_none() {
-        let dir = std::env::temp_dir().join(format!("rustide-detect-empty-{}", std::process::id()));
+        let dir = std::env::temp_dir().join(format!("oxide-detect-empty-{}", std::process::id()));
         std::fs::create_dir_all(&dir).unwrap();
         let info = detect_project(&dir);
         assert_eq!(info.kind, "none");

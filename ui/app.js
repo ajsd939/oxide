@@ -1,4 +1,4 @@
-/* Rust IDE frontend: explorer tree, tabs, Monaco wiring, LSP bridge,
+/* OxIDE frontend: explorer tree, tabs, Monaco wiring, LSP bridge,
    builds, quick-open, themes. Talks to the Rust backend via Tauri IPC. */
 
 // Bridge — guarded so a missing injection shows a clear message instead of
@@ -8,7 +8,7 @@ const invoke = Tauri?.core?.invoke?.bind(Tauri.core);
 const listen = Tauri?.event?.listen?.bind(Tauri.event);
 
 // Self-reporting: everything notable (and every error) lands in
-// %TEMP%\rustide-frontend.log so failures are visible without devtools.
+// %TEMP%\oxide-frontend.log so failures are visible without devtools.
 function logFrontend(msg) {
   if (typeof invoke !== "function") return;
   try {
@@ -181,7 +181,7 @@ async function boot() {
   // Terminal dock: visible by default at the bottom, sized/persisted by the
   // user via the drag divider. Spawned now so the shell runs in the project.
   $("panel").style.height =
-    (parseInt(localStorage.getItem("rustide-panel-h") || "300", 10) || 300) + "px";
+    (parseInt(localStorage.getItem("oxide-panel-h") || "300", 10) || 300) + "px";
   setPanelTab("terminal");
   wireResizer();
 
@@ -203,7 +203,7 @@ function wireResizer() {
     const rect = $("main").getBoundingClientRect();
     const h = Math.min(Math.max(rect.bottom - e.clientY, 120), Math.floor(rect.height * 0.7));
     panel.style.height = h + "px";
-    localStorage.setItem("rustide-panel-h", String(h));
+    localStorage.setItem("oxide-panel-h", String(h));
     try { termFit?.fit(); } catch { /* terminal not open yet */ }
   });
   window.addEventListener("mouseup", () => {

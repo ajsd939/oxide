@@ -1,4 +1,4 @@
-# Rust IDE (Tauri + Monaco)
+# OxIDE
 
 A VS Code-like IDE written in Rust. Backend: **Tauri 2** (Rust + WebView2).
 Frontend: vanilla HTML/CSS/JS with the **Monaco editor** — the same editor core
@@ -89,18 +89,18 @@ Then build installers:
 
 ```cmd
 cargo install tauri-cli --version "^2" --locked
-cargo tauri build --bundles nsis     :: -> target\release\bundle\nsis\Rust IDE_0.3.0_x64-setup.exe
+cargo tauri build --bundles nsis     :: -> target\release\bundle\nsis\OxIDE_0.3.0_x64-setup.exe
 ```
 
 On Linux, build the release binary and tar it (needs `libwebkit2gtk-4.1-dev
 libgtk-3-dev libayatana-appindicator3-dev librsvg2-dev libxdo-dev libssl-dev`):
 
 ```bash
-cargo build --release && tar -czf rustide-linux-x64.tar.gz -C target/release rustide
+cargo build --release && tar -czf oxide-linux-x64.tar.gz -C target/release oxide
 ```
 
 Pushing to `main` (or the Actions tab, manually) also builds both on GitHub
-Actions — artifacts: `rustide-windows-nsis` and `rustide-linux-targz`.
+Actions — artifacts: `oxide-windows-nsis` and `oxide-linux-targz`.
 
 Publishing repo updates works without git.exe via the Git Data API:
 

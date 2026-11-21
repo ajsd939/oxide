@@ -20,7 +20,7 @@ jobs:
         run: cargo tauri build --bundles nsis
       - uses: actions/upload-artifact@v4
         with:
-          name: rustide-windows-nsis
+          name: oxide-windows-nsis
           path: target/release/bundle/nsis/*.exe
 
   linux-targz:
@@ -41,11 +41,11 @@ jobs:
         run: cargo build --release
       - name: Package tar.gz
         run: |
-          mkdir -p rustide-linux
-          cp target/release/rustide rustide-linux/
-          cp README.md LICENSE* rustide-linux/ 2>/dev/null || cp README.md rustide-linux/
-          tar -czf rustide-linux-x64.tar.gz rustide-linux
+          mkdir -p oxide-linux
+          cp target/release/oxide oxide-linux/
+          cp README.md LICENSE* oxide-linux/ 2>/dev/null || cp README.md oxide-linux/
+          tar -czf oxide-linux-x64.tar.gz oxide-linux
       - uses: actions/upload-artifact@v4
         with:
-          name: rustide-linux-targz
-          path: rustide-linux-x64.tar.gz
+          name: oxide-linux-targz
+          path: oxide-linux-x64.tar.gz

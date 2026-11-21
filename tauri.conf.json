@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Rust IDE",
+  "productName": "OxIDE",
   "version": "0.3.0",
-  "identifier": "dev.filip.rustide",
+  "identifier": "dev.filip.oxide",
   "build": {
     "frontendDist": "ui"
   },
@@ -10,7 +10,7 @@
     "withGlobalTauri": true,
     "windows": [
       {
-        "title": "Rust IDE",
+        "title": "OxIDE",
         "width": 1360,
         "height": 860,
         "center": true,

@@ -6,9 +6,9 @@
 # Usage: powershell -ExecutionPolicy Bypass -File scripts/publish-github.ps1 [-Message "..."]
 
 param(
-    [string]$Repo = "ajsd939/rustide",
+    [string]$Repo = "ajsd939/oxide",
     [string]$Branch = "main",
-    [string]$Message = "Rust IDE 0.3.0 - Tauri + Monaco IDE (LSP intellisense, terminal, git, builds)"
+    [string]$Message = "OxIDE 0.3.0 - Tauri + Monaco IDE (LSP intellisense, terminal, git, builds)"
 )
 
 $ErrorActionPreference = "Stop"

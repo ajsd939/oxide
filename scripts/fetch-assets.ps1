@@ -12,7 +12,7 @@ $packages = @(
     @{ Url = "https://registry.npmjs.org/@xterm/addon-fit/-/addon-fit-0.10.0.tgz"; Tar = "fit.tgz"; Src = "package/lib"; Dest = "$ui\xterm" }
 )
 
-$tmp = Join-Path $env:TEMP "rustide-assets"
+$tmp = Join-Path $env:TEMP "oxide-assets"
 New-Item -ItemType Directory -Force -Path $tmp | Out-Null
 
 foreach ($pkg in $packages) {
