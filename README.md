@@ -4,9 +4,6 @@ A VS Code-like IDE written in Rust. Backend: **Tauri 2** (Rust + WebView2).
 Frontend: vanilla HTML/CSS/JS with the **Monaco editor** — the same editor core
 VS Code uses — served as static assets (no npm/bundler required).
 
-Replaces the earlier gpui-ce prototype (`../gpui-ide`), which is kept for
-reference only.
-
 ## Features
 
 - **Explorer** — native folder picker (Ctrl+O / project pill / Open Folder
@@ -56,7 +53,7 @@ tauri-ide/
     lsp.rs        minimal JSON-RPC LSP client (rust-analyzer over stdio)
     term.rs       integrated terminal: PTY (ConPTY) session bridged to xterm.js
     git.rs        git CLI wrappers: status parse, stage, commit, push, pull
-    completion.rs completion item model (kept from v1)
+    completion.rs completion item model
     output.rs     cargo runner with streamed output sink
   ui/             frontend (served statically by tauri)
     index.html    shell: activity bar, explorer, source control, tabs, dock
@@ -118,5 +115,3 @@ powershell -ExecutionPolicy Bypass -File scripts\publish-github.ps1 -Message "up
 - Editor text syncs to rust-analyzer as full-text `didChange` (debounced 350 ms).
 - Diagnostics map 1:1 into Monaco markers (LSP and Monaco both use 0-based
   lines + UTF-16 columns).
-- The gpui-ce prototype lives in `../gpui-ide` — same Rust core ideas, UI
-  rewritten for the web where styling is actually enjoyable.
