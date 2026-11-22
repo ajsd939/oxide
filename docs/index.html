@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OxIDE — a VS Code-like IDE in Rust</title>
+  <meta name="description" content="OxIDE is a fast, minimal IDE built in Rust with Tauri and Monaco: rust-analyzer intellisense, an integrated terminal, git built in, and language-aware build & run." />
+  <link rel="icon" type="image/png" href="icon.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="nav">
+    <a class="brand" href="#">
+      <img src="icon.png" alt="OxIDE logo" />
+      <span>OxIDE</span>
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#keys">Shortcuts</a>
+      <a href="https://github.com/ajsd939/oxide" target="_blank" rel="noopener">GitHub</a>
+      <a class="nav-cta" href="https://github.com/ajsd939/oxide/releases/latest/download/OxIDE_0.3.0_x64-setup.exe">Download</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-copy">
+      <h1>Code at the speed<br />of <span class="grad">Rust</span>.</h1>
+      <p class="tagline">
+        OxIDE is a fast, minimal IDE built in Rust with Tauri and Monaco.
+        Real rust-analyzer intellisense, a docked terminal, git built in —
+        and a 5 MB installer.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="https://github.com/ajsd939/oxide/releases/latest/download/OxIDE_0.3.0_x64-setup.exe">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5v8M4.5 6 8 9.5 11.5 6M2.5 12.5h11"/></svg>
+          Download for Windows
+        </a>
+        <a class="btn ghost" href="https://github.com/ajsd939/oxide/releases/latest/download/oxide-linux-x64.tar.gz">Linux .tar.gz</a>
+        <a class="btn ghost" href="https://github.com/ajsd939/oxide/releases" target="_blank" rel="noopener">All releases</a>
+      </div>
+      <p class="hero-note">Windows 10/11 · Linux · MIT licensed · rust-analyzer + cargo enable intellisense &amp; builds</p>
+    </div>
+
+    <div class="hero-shot" aria-hidden="true">
+      <div class="shot-window">
+        <div class="shot-titlebar">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span class="shot-title">OxIDE</span>
+        </div>
+        <div class="shot-body">
+          <div class="shot-side">
+            <div class="shot-side-head">EXPLORER</div>
+            <div class="shot-file indent1"><span class="chev">▾</span> src</div>
+            <div class="shot-file active indent2">main.rs</div>
+            <div class="shot-file indent2">editor.rs</div>
+            <div class="shot-file indent2">lsp.rs</div>
+            <div class="shot-file indent1"><span class="chev">▸</span> ui</div>
+            <div class="shot-file indent1"><span class="chev">▸</span> tests</div>
+          </div>
+          <div class="shot-editor">
+            <div class="shot-tabs">
+              <span class="shot-tab active">main.rs</span>
+              <span class="shot-tab">lsp.rs</span>
+            </div>
+            <div class="shot-code">
+              <div class="ln"><span class="gut">1</span><span class="tok kw">fn</span> <span class="tok fn">main</span><span class="tok pl">() {</span></div>
+              <div class="ln"><span class="gut">2</span><span class="tok kw">&nbsp;&nbsp;let</span> <span class="tok var">ide</span> <span class="tok op">=</span> <span class="tok fn">OxIDE</span><span class="tok pl">::</span><span class="tok fn">new</span><span class="tok pl">();</span></div>
+              <div class="ln"><span class="gut">3</span><span class="tok pl">&nbsp;&nbsp;</span><span class="tok com">// intellisense, terminal, git — built in</span></div>
+              <div class="ln"><span class="gut">4</span><span class="tok var">ide</span><span class="tok pl">.</span><span class="tok fn">launch</span><span class="tok pl">();</span></div>
+              <div class="ln"><span class="gut">5</span><span class="tok pl">}</span></div>
+              <div class="ln"><span class="gut">6</span>&nbsp;</div>
+              <div class="cursor"></div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-term">
+          <span class="term-prompt">$</span> cargo run <span class="term-ok">✓ finished in 0.42s</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="features" class="features">
+    <h2>Everything you need, nothing you don't.</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M8 2 3 8l5 6M12 2l2 3-4 6"/></svg>
+        </div>
+        <h3>Monaco editor</h3>
+        <p>The same editor core VS Code uses — multi-cursor, find &amp; replace, bracket colorization, minimap, smooth everything.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="8" cy="8" r="6"/><path d="M5.5 8h5M8 5.5v5"/></svg>
+        </div>
+        <h3>Real intellisense</h3>
+        <p>rust-analyzer over a built-in JSON-RPC client: completion popups and live error squiggles, wired straight into the editor.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"/><path d="M4 6l2.5 2L4 10"/></svg>
+        </div>
+        <h3>Docked terminal</h3>
+        <p>A real PTY running PowerShell, bash, or zsh — resizable, always one keystroke away (Ctrl+`).</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="5" cy="3.5" r="1.8"/><circle cx="5" cy="12.5" r="1.8"/><circle cx="11" cy="6" r="1.8"/><path d="M5 5.3v5.4M11 7.8c0 3-3 3.5-4.5 3.5"/></svg>
+        </div>
+        <h3>Git built in</h3>
+        <p>Stage, commit, push, pull from a dedicated source-control panel — status refreshed live, no context switching.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg>
+        </div>
+        <h3>Language-aware build</h3>
+        <p>OxIDE detects Rust, Node, Python, and Go projects and picks the right build &amp; run commands — output streams into the dock.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2 4h12M2 8h8M2 12h10"/></svg>
+        </div>
+        <h3>Quick &amp; themed</h3>
+        <p>Fuzzy file finder (Ctrl+P), three built-in themes that restyle the whole shell, and a UI with rounded corners that respects your eyes.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="keys" class="keys">
+    <h2>Shortcuts you'll actually use.</h2>
+    <div class="keys-grid">
+      <div class="key-row"><span>Save / quick open / open folder</span><span><kbd>Ctrl</kbd><kbd>S</kbd> <kbd>Ctrl</kbd><kbd>P</kbd> <kbd>Ctrl</kbd><kbd>O</kbd></span></div>
+      <div class="key-row"><span>Toggle terminal dock</span><span><kbd>Ctrl</kbd><kbd>`</kbd></span></div>
+      <div class="key-row"><span>Build / Run</span><span><kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>B</kbd> <kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>R</kbd></span></div>
+      <div class="key-row"><span>Source control panel</span><span><kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>G</kbd></span></div>
+      <div class="key-row"><span>Cycle theme</span><span><kbd>Ctrl</kbd><kbd>K</kbd></span></div>
+      <div class="key-row"><span>Everything the editor can do</span><span class="muted">it's Monaco — search, multi-cursor, snippets…</span></div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Try it — it's one small download.</h2>
+    <div class="hero-actions center">
+      <a class="btn primary" href="https://github.com/ajsd939/oxide/releases/latest/download/OxIDE_0.3.0_x64-setup.exe">Download for Windows</a>
+      <a class="btn ghost" href="https://github.com/ajsd939/oxide/releases/latest/download/oxide-linux-x64.tar.gz">Download for Linux</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>OxIDE — MIT licensed · built in Rust with Tauri + Monaco</span>
+    <a href="https://github.com/ajsd939/oxide" target="_blank" rel="noopener">github.com/ajsd939/oxide</a>
+  </footer>
+
+  <script>
+    // Gentle reveal-on-scroll for cards.
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("in"); });
+    }, { threshold: 0.15 });
+    document.querySelectorAll(".card, .key-row").forEach((el) => io.observe(el));
+  </script>
+</body>
+</html>

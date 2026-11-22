@@ -1,5 +1,7 @@
 /target
 /gen
+/dist
 /ui/monaco/
 /ui/xterm/
+nul
 *.log

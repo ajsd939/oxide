@@ -14,11 +14,16 @@ param(
 $ErrorActionPreference = "Stop"
 $root = (Resolve-Path (Split-Path -Parent $PSScriptRoot)).Path.TrimEnd('\', '/')
 
-$excludeDirs = @("target", "monaco", "xterm", ".git", "node_modules")
+$excludeDirs = @("target", "monaco", "xterm", ".git", "node_modules", "dist", "gen")
+# Windows reserved device names (aux, con, nul, com1...) can't be read as files.
+$reservedNames = @("aux", "con", "prn", "nul", "com1", "com2", "com3", "com4", "com5", "com6", "com7", "com8", "com9", "lpt1", "lpt2", "lpt3", "lpt4", "lpt5", "lpt6", "lpt7", "lpt8", "lpt9")
 $files = Get-ChildItem -Path $root -Recurse -File | Where-Object {
     $rel = $_.FullName.Substring($root.Length).TrimStart('\', '/')
     $parts = $rel -split '[\\/]'
-    -not ($parts | Where-Object { $excludeDirs -contains $_ })
+    $excluded = $parts | Where-Object { $excludeDirs -contains $_ }
+    $baseName = [IO.Path]::GetFileNameWithoutExtension($_.FullName).ToLower()
+    $reserved = $reservedNames -contains $baseName
+    -not $excluded -and -not $reserved -and $_.FullName
 }
 
 Write-Host "Publishing $($files.Count) files to $Repo ($Branch)"
